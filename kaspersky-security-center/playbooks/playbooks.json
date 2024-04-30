@@ -3,19 +3,17 @@
   "data": [
     {
       "@type": "WorkflowCollection",
-      "name": "Sample - Kaspersky Security Center - 1.0.1",
-      "description": null,
+      "name": "Sample - Kaspersky Security Center - 1.0.2",
+      "description": "Sample playbooks for \"Kaspersky Security Center\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
       "visible": true,
       "image": null,
       "uuid": "22e984b0-0ebc-4d3c-8355-87ac61ba047f",
-      "id": 434,
-      "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-      "createDate": 1656667767.264847,
-      "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-      "modifyDate": 1656667767.264847,
+      "id": 53,
       "deletedAt": null,
       "importedBy": [],
-      "recordTags": [],
+      "recordTags": [
+        "kaspersky-security-center"
+      ],
       "workflows": [
         {
           "@type": "Workflow",
@@ -30,7 +28,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668051,
+          "lastModifyDate": 1713153728,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/7508bda7-e55e-47fa-a70a-c64ea9383de1",
@@ -43,9 +41,9 @@
                 "name": "Kaspersky Security Center",
                 "config": "",
                 "params": {
-                  "group_id": "1"
+                  "group_id": "0"
                 },
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "connector": "kaspersky-security-center",
                 "operation": "get_listhost_group",
                 "operationTitle": "Get Host List",
@@ -56,6 +54,7 @@
               "top": "165",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
               "uuid": "4a28574b-c9b3-4283-b300-6ed2371f0bcd"
             },
             {
@@ -83,6 +82,7 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "7508bda7-e55e-47fa-a70a-c64ea9383de1"
             }
           ],
@@ -94,16 +94,14 @@
               "sourceStep": "/api/3/workflow_steps/7508bda7-e55e-47fa-a70a-c64ea9383de1",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "7b6b8bab-701b-433e-9460-0cbff83fb87d"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "0734e64b-6e29-4481-bd25-83e1e4af4a69",
-          "id": 3817,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668009.97675,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668045.51554,
+          "id": 622,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -125,7 +123,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668175,
+          "lastModifyDate": 1713179942,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/8b09ee90-0fdf-4b37-9599-6c2da19139cb",
@@ -139,9 +137,9 @@
                 "config": "",
                 "params": {
                   "flag": 1,
-                  "group_id": "1"
+                  "group_id": "5"
                 },
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "connector": "kaspersky-security-center",
                 "operation": "delete_group",
                 "operationTitle": "Delete Specific Group",
@@ -152,6 +150,7 @@
               "top": "165",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
               "uuid": "840105d7-5e6f-41b2-b61a-593e2d1afa9a"
             },
             {
@@ -179,6 +178,7 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "8b09ee90-0fdf-4b37-9599-6c2da19139cb"
             }
           ],
@@ -190,16 +190,14 @@
               "sourceStep": "/api/3/workflow_steps/8b09ee90-0fdf-4b37-9599-6c2da19139cb",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "069c6075-9fe1-4434-9c34-512f3d4c8405"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "0f07005d-0377-4fab-8f41-f6f1560240cd",
-          "id": 3819,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668136.131702,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668170.185051,
+          "id": 623,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -221,11 +219,33 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656667925,
+          "lastModifyDate": 1713153666,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/0538f94e-349e-475d-8ebf-1e94fb006fb7",
           "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get All Groups Details",
+              "description": null,
+              "arguments": {
+                "name": "Kaspersky Security Center",
+                "config": "",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "kaspersky-security-center",
+                "operation": "get_groups",
+                "operationTitle": "Get All Groups Details",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e67cd577-cccb-4d25-8468-a350b15c112d"
+            },
             {
               "@type": "WorkflowStep",
               "name": "Start",
@@ -251,28 +271,8 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "0538f94e-349e-475d-8ebf-1e94fb006fb7"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get All Groups Details",
-              "description": null,
-              "arguments": {
-                "name": "Kaspersky Security Center",
-                "config": "",
-                "params": [],
-                "version": "1.0.1",
-                "connector": "kaspersky-security-center",
-                "operation": "get_groups",
-                "operationTitle": "Get All Groups Details",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "165",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "uuid": "e67cd577-cccb-4d25-8468-a350b15c112d"
             }
           ],
           "routes": [
@@ -283,16 +283,14 @@
               "sourceStep": "/api/3/workflow_steps/0538f94e-349e-475d-8ebf-1e94fb006fb7",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "45b3bca7-e384-4cb9-b82f-76829f89e6eb"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "1979b166-b1c6-4211-8744-dbac601d7985",
-          "id": 3815,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656667889.44873,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656667919.457163,
+          "id": 624,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -314,7 +312,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668723,
+          "lastModifyDate": 1713180984,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/b8c23a85-ae06-44b4-bee5-54ce66ff41c9",
@@ -327,10 +325,10 @@
                 "name": "Kaspersky Security Center",
                 "config": "",
                 "params": {
-                  "newgroup": "1",
-                  "pHostNames": "EC2AMAZ-U66K3L"
+                  "newgroup": "4",
+                  "pHostNames": "Microsoft Windows Server 2012 R2"
                 },
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "connector": "kaspersky-security-center",
                 "operation": "move_hosts",
                 "operationTitle": "Move host to specific Group",
@@ -341,6 +339,7 @@
               "top": "165",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
               "uuid": "83defddb-f807-4b6d-a6e7-09259ad2ed05"
             },
             {
@@ -368,6 +367,7 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "b8c23a85-ae06-44b4-bee5-54ce66ff41c9"
             }
           ],
@@ -379,16 +379,14 @@
               "sourceStep": "/api/3/workflow_steps/b8c23a85-ae06-44b4-bee5-54ce66ff41c9",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "38044194-dbe6-41f7-bc72-b45da7a652fe"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "33e4ff49-cf2b-4607-976c-62fa56c0aa40",
-          "id": 3825,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668616.54792,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668718.23394,
+          "id": 625,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -410,11 +408,35 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668346,
+          "lastModifyDate": 1713172649,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/146bd4f4-3950-444b-8e34-81f87aa3490e",
           "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get All Policies on Specific Group",
+              "description": null,
+              "arguments": {
+                "name": "Kaspersky Security Center",
+                "config": "",
+                "params": {
+                  "group_id": "0"
+                },
+                "version": "1.0.2",
+                "connector": "kaspersky-security-center",
+                "operation": "list_policies_request",
+                "operationTitle": "Get All Policies on Specific Group",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "5effcadd-235f-4e85-ad4b-6c8f5db81e24"
+            },
             {
               "@type": "WorkflowStep",
               "name": "Start",
@@ -440,30 +462,8 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "146bd4f4-3950-444b-8e34-81f87aa3490e"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get All Policies on Specific Group",
-              "description": null,
-              "arguments": {
-                "name": "Kaspersky Security Center",
-                "config": "",
-                "params": {
-                  "group_id": "1"
-                },
-                "version": "1.0.1",
-                "connector": "kaspersky-security-center",
-                "operation": "list_policies_request",
-                "operationTitle": "Get All Policies on Specific Group",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "165",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "uuid": "5effcadd-235f-4e85-ad4b-6c8f5db81e24"
             }
           ],
           "routes": [
@@ -474,16 +474,14 @@
               "sourceStep": "/api/3/workflow_steps/146bd4f4-3950-444b-8e34-81f87aa3490e",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "5ce362d7-d22a-4988-80e7-60ff4a466052"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "4e67f819-373b-4f8b-976d-bc4a385916e7",
-          "id": 3822,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668308.259927,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668340.838877,
+          "id": 626,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -505,7 +503,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668774,
+          "lastModifyDate": 1713153768,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/8302c664-cd36-4fc8-b787-3b7788837e7b",
@@ -518,9 +516,9 @@
                 "name": "Kaspersky Security Center",
                 "config": "",
                 "params": {
-                  "host_id": "5528e16f-bf83-47c3-8d0b-0fdf79f9d673"
+                  "host_id": "ccfdea06-d010-4d6e-87e5-1053a5ef7c83"
                 },
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "connector": "kaspersky-security-center",
                 "operation": "get_host_details",
                 "operationTitle": "Get Host Details",
@@ -531,6 +529,7 @@
               "top": "165",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
               "uuid": "47749cd8-51e0-4f0b-bb28-e8ed74121adc"
             },
             {
@@ -558,6 +557,7 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "8302c664-cd36-4fc8-b787-3b7788837e7b"
             }
           ],
@@ -569,16 +569,14 @@
               "sourceStep": "/api/3/workflow_steps/8302c664-cd36-4fc8-b787-3b7788837e7b",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "acd80823-3d64-48ab-a7a6-7b9c047b46b5"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "51c426eb-9cca-47d1-a821-a391f54d30a3",
-          "id": 3816,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656667943.411877,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668769.174418,
+          "id": 627,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -600,11 +598,35 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668812,
+          "lastModifyDate": 1713176968,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/7c15e111-5ed3-4a1e-9a13-e6e2fac42381",
           "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Software Installed on Specefic Host",
+              "description": null,
+              "arguments": {
+                "name": "Kaspersky Security Center",
+                "config": "",
+                "params": {
+                  "host_id": "ccfdea06-d010-4d6e-87e5-1053a5ef7c83"
+                },
+                "version": "1.0.2",
+                "connector": "kaspersky-security-center",
+                "operation": "get_software_installed",
+                "operationTitle": "Get Software Installed on Specific Host",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "99c80286-b8bc-4bde-a275-8b893778604c"
+            },
             {
               "@type": "WorkflowStep",
               "name": "Start",
@@ -630,50 +652,26 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "7c15e111-5ed3-4a1e-9a13-e6e2fac42381"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get Software Installed on Specefic Host",
-              "description": null,
-              "arguments": {
-                "name": "Kaspersky Security Center",
-                "config": "",
-                "params": {
-                  "host_id": "5528e16f-bf83-47c3-8d0b-0fdf79f9d673"
-                },
-                "version": "1.0.1",
-                "connector": "kaspersky-security-center",
-                "operation": "get_software_installed",
-                "operationTitle": "Get Software Installed on Specefic Host",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "165",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "uuid": "99c80286-b8bc-4bde-a275-8b893778604c"
             }
           ],
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "name": "Start -> Get Software Installed on Specefic Host",
+              "name": "Start -> Get Software Installed on Specific Host",
               "targetStep": "/api/3/workflow_steps/99c80286-b8bc-4bde-a275-8b893778604c",
               "sourceStep": "/api/3/workflow_steps/7c15e111-5ed3-4a1e-9a13-e6e2fac42381",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "964b0734-1336-4314-9b28-322dc2433ed8"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "56df132e-6ba1-46cc-96a9-e219374a6290",
-          "id": 3821,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668248.670614,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668807.299996,
+          "id": 628,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -695,11 +693,39 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668570,
+          "lastModifyDate": 1713179190,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/c478bdab-1151-4f0b-acff-a436031c653c",
           "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Add Policy",
+              "description": null,
+              "arguments": {
+                "name": "Kaspersky Security Center",
+                "config": "",
+                "params": {
+                  "KLPOL_DN": "Kaspersky Endpoint Security for Windows (11.0.1)",
+                  "nGroupId": "0",
+                  "KLPOL_PRODUCT": "KES",
+                  "KLPOL_VERSION": "11.0.1.0",
+                  "KLPOL_GROUP_ID": 0
+                },
+                "version": "1.0.2",
+                "connector": "kaspersky-security-center",
+                "operation": "add_policy_request",
+                "operationTitle": "Add Policy",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "f49fe00f-3355-4333-9480-2876a4a47d17"
+            },
             {
               "@type": "WorkflowStep",
               "name": "Start",
@@ -725,34 +751,8 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "c478bdab-1151-4f0b-acff-a436031c653c"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Add Policy",
-              "description": null,
-              "arguments": {
-                "name": "Kaspersky Security Center",
-                "config": "",
-                "params": {
-                  "KLPOL_DN": "Kaspersky Endpoint Security for Windows (11.0.1)",
-                  "nGroupId": "1",
-                  "KLPOL_PRODUCT": "KES",
-                  "KLPOL_VERSION": "11.0.1.0",
-                  "KLPOL_GROUP_ID": 1
-                },
-                "version": "1.0.1",
-                "connector": "kaspersky-security-center",
-                "operation": "add_policy_request",
-                "operationTitle": "Add Policy",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "165",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "uuid": "f49fe00f-3355-4333-9480-2876a4a47d17"
             }
           ],
           "routes": [
@@ -763,16 +763,14 @@
               "sourceStep": "/api/3/workflow_steps/c478bdab-1151-4f0b-acff-a436031c653c",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "19b354a8-f8b1-427d-ba76-bba8eca57523"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "692f6bdb-7029-419e-a21c-0edb780eb0eb",
-          "id": 3824,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668432.918384,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668565.402757,
+          "id": 629,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -794,7 +792,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668111,
+          "lastModifyDate": 1713173305,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/b03cbd6f-6ee4-4f4b-9140-340c43512de5",
@@ -807,9 +805,9 @@
                 "name": "Kaspersky Security Center",
                 "config": "",
                 "params": {
-                  "host_id": "1"
+                  "host_id": "ccfdea06-d010-4d6e-87e5-1053a5ef7c83"
                 },
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "connector": "kaspersky-security-center",
                 "operation": "get_product_installed",
                 "operationTitle": "Get Products Installed",
@@ -820,6 +818,7 @@
               "top": "165",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
               "uuid": "4582ea37-1cd0-4f33-b792-cf383fac7114"
             },
             {
@@ -847,6 +846,7 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "b03cbd6f-6ee4-4f4b-9140-340c43512de5"
             }
           ],
@@ -858,16 +858,14 @@
               "sourceStep": "/api/3/workflow_steps/b03cbd6f-6ee4-4f4b-9140-340c43512de5",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "ae7bbcf3-c782-415e-9d63-6e238ac5d3b8"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "6b27337b-38d5-45d1-b0b6-cfa4f8f916e3",
-          "id": 3818,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668070.190464,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668106.120283,
+          "id": 630,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -889,11 +887,36 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668783,
+          "lastModifyDate": 1713177220,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/b0bb2ed5-70fc-4ae7-9e10-647d35d95700",
           "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Add Group",
+              "description": null,
+              "arguments": {
+                "name": "Kaspersky Security Center",
+                "config": "",
+                "params": {
+                  "name": "demo",
+                  "parent_id": "1"
+                },
+                "version": "1.0.2",
+                "connector": "kaspersky-security-center",
+                "operation": "add_group",
+                "operationTitle": "Add Group",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "df6ab16c-9ccc-4cc0-acaf-8d3a8964cdbf"
+            },
             {
               "@type": "WorkflowStep",
               "name": "Start",
@@ -919,31 +942,8 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "b0bb2ed5-70fc-4ae7-9e10-647d35d95700"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Add Group",
-              "description": null,
-              "arguments": {
-                "name": "Kaspersky Security Center",
-                "config": "",
-                "params": {
-                  "name": "demo",
-                  "parent_id": "1"
-                },
-                "version": "1.0.1",
-                "connector": "kaspersky-security-center",
-                "operation": "add_group",
-                "operationTitle": "Add Group",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "165",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "uuid": "df6ab16c-9ccc-4cc0-acaf-8d3a8964cdbf"
             }
           ],
           "routes": [
@@ -954,16 +954,14 @@
               "sourceStep": "/api/3/workflow_steps/b0bb2ed5-70fc-4ae7-9e10-647d35d95700",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "09b67eaa-05de-4076-aa19-fe695b17e0b1"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "a78788a0-581d-4460-8bc4-4845b46e7d40",
-          "id": 3820,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668192.82999,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668777.64579,
+          "id": 631,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -985,11 +983,35 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668412,
+          "lastModifyDate": 1713173147,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/87776c93-c1b0-42d0-a8cb-8ff785079fe4",
           "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Specific Policy",
+              "description": null,
+              "arguments": {
+                "name": "Kaspersky Security Center",
+                "config": "",
+                "params": {
+                  "policy_id": "1"
+                },
+                "version": "1.0.2",
+                "connector": "kaspersky-security-center",
+                "operation": "get_policy_request",
+                "operationTitle": "Get Specific Policy",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ef5bacf4-290c-4db5-82f8-8420d62203fe"
+            },
             {
               "@type": "WorkflowStep",
               "name": "Start",
@@ -1015,30 +1037,8 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "87776c93-c1b0-42d0-a8cb-8ff785079fe4"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get Specific Policy",
-              "description": null,
-              "arguments": {
-                "name": "Kaspersky Security Center",
-                "config": "",
-                "params": {
-                  "policy_id": "1"
-                },
-                "version": "1.0.1",
-                "connector": "kaspersky-security-center",
-                "operation": "get_policy_request",
-                "operationTitle": "Get Specific Policy",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "165",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "uuid": "ef5bacf4-290c-4db5-82f8-8420d62203fe"
             }
           ],
           "routes": [
@@ -1049,16 +1049,14 @@
               "sourceStep": "/api/3/workflow_steps/87776c93-c1b0-42d0-a8cb-8ff785079fe4",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "4047d31c-57dd-48c5-96a6-fcb2838749b5"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "dcf8dd37-e4e3-492e-9996-7a94da8248de",
-          "id": 3823,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656668370.284198,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668410.896096,
+          "id": 632,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1080,11 +1078,33 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1656668797,
+          "lastModifyDate": 1713165931,
           "collection": "/api/3/workflow_collections/22e984b0-0ebc-4d3c-8355-87ac61ba047f",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/65288fa8-9615-4246-b090-f9d6db1ff87d",
           "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Host Group Static Info",
+              "description": null,
+              "arguments": {
+                "name": "Kaspersky Security Center",
+                "config": "",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "kaspersky-security-center",
+                "operation": "get_hosts_group_static_info",
+                "operationTitle": "Get Host Group Static Info",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ba96f279-1315-43bf-b891-6b3adb0dd76b"
+            },
             {
               "@type": "WorkflowStep",
               "name": "Start",
@@ -1110,28 +1130,8 @@
               "top": "30",
               "left": "125",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
               "uuid": "65288fa8-9615-4246-b090-f9d6db1ff87d"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get Host Group Static Info",
-              "description": null,
-              "arguments": {
-                "name": "Kaspersky Security Center",
-                "config": "",
-                "params": [],
-                "version": "1.0.1",
-                "connector": "kaspersky-security-center",
-                "operation": "get_hosts_group_static_info",
-                "operationTitle": "Get Host Group Static Info",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "165",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "uuid": "ba96f279-1315-43bf-b891-6b3adb0dd76b"
             }
           ],
           "routes": [
@@ -1142,16 +1142,14 @@
               "sourceStep": "/api/3/workflow_steps/65288fa8-9615-4246-b090-f9d6db1ff87d",
               "label": null,
               "isExecuted": false,
+              "group": null,
               "uuid": "d3ed8590-bdfa-4a65-8515-d7573eab28ad"
             }
           ],
+          "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "ff696fdc-8102-4114-8b93-73d222740184",
-          "id": 3814,
-          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "createDate": 1656667808.849646,
-          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
-          "modifyDate": 1656668792.105968,
+          "id": 633,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,

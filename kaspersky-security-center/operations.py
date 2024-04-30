@@ -1,7 +1,7 @@
 """
 Copyright start
 MIT License
-Copyright (c) 2023 Fortinet Inc
+Copyright (c) 2024 Fortinet Inc
 Copyright end
 """
 import base64, json, requests
@@ -21,32 +21,32 @@ errors = {
 
 class KasperskyEDR(object):
     def __init__(self, config, *args, **kwargs):
+        url = config.get('server_url').strip('/') + ':' + str(config.get('server_port'))
+        if not url.startswith('https://') and not url.startswith('http://'):
+            self.server_url = 'https://{0}/'.format(url)
+        else:
+            self.server_url = url + '/'
         self.username = config.get('username')
         self.password = config.get('password')
-        url = config.get('server_url').strip('/')
-        if not url.startswith('https://') and not url.startswith('http://'):
-            self.url = 'https://{0}/api/v1.0/'.format(url)
-        else:
-            self.url = url + '/api/v1.0/'
-        self.username = base64.b64encode(self.username.encode('utf-8')).decode("utf-8")
-        self.password = base64.b64encode(self.password.encode('utf-8')).decode("utf-8")
         self.sslVerify = config.get('verify_ssl')
+        self.Session()
 
-    def make_rest_call(self, endpoint, headers=None, params=None, data=None, method='GET'):
+    def make_request(self, endpoint, headers=None, params=None, data=None, method='GET'):
         try:
-            url = self.url + endpoint
-            headers = {'Content-Type': 'application/json',
-                       'Authorization': 'KSCBasic user="{0}", pass="{1}"'.format(self.username, self.password)
-                       }
+            url = self.server_url + endpoint
+            logger.debug('Request data: {0}'.format(data))
+            logger.debug('Request params : {0}'.format(params))
             response = requests.request(method, url, headers=headers, verify=self.sslVerify, data=data, params=params)
             if response.ok or response.status_code == 200:
-                logger.info('Successfully got response for url {0}'.format(url))
-                if 'json' in str(response.headers):
-                    return response.json()
-                else:
-                    return response.content
+                logger.debug('Successfully got response for url {0}'.format(url))
+                logger.debug('Response body: {0}'.format(response.text))
+                return response.json()
             else:
-                raise ConnectorError("{0}".format(errors.get(response.status_code, '')))
+                if response.status_code == 403:
+                    raise ConnectorError('Insufficient permission')
+                else:
+                    logger.error(response.text)
+                    raise ConnectorError("{0}".format(errors.get(response.status_code, '')))
         except requests.exceptions.SSLError:
             raise ConnectorError('SSL certificate validation failed')
         except requests.exceptions.ConnectTimeout:
@@ -57,196 +57,205 @@ class KasperskyEDR(object):
         except requests.exceptions.ConnectionError:
             raise ConnectorError('Invalid endpoint or credentials')
         except Exception as err:
+            logger.exception(str(err))
             raise ConnectorError(str(err))
 
+    def Session(self):
+        session = requests.Session()
+        return session
 
-def login(config, params):
+    def start_session(self, config, params):
+        user = base64.b64encode(config.get('username').encode('utf-8')).decode("utf-8")
+        password = base64.b64encode(config.get('password').encode('utf-8')).decode("utf-8")
+        headers = {'Content-Type': 'application/json',
+                   'Authorization': 'KSCBasic user="{0}", pass="{1}", internal="0"'.format(user, password)
+                   }
+        endpoint = 'api/v1.0/Session.StartSession'
+
+        token = self.make_request(endpoint=endpoint, method='POST', headers=headers)
+        return {'X-KSC-Session': token['PxgRetVal'], 'Content-Type': 'application/json'}
+
+
+def get_search_results(strAccessor, config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'login'
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST')
-    return response
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.1/ChunkAccessor.GetItemsCount'
+    data = {"strAccessor": strAccessor}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    items_count = json.loads(response.text)['PxgRetVal']
 
 
 def get_hosts_group_static_info(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'HostGroup.GetStaticInfo'
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST')
-    return response
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/HostGroup.GetStaticInfo'
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, verify=False)
+    return json.loads(response.text)
 
 
 def get_host_details(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'HostGroup.GetHostInfo'
-    payload = {"strHostName": str(params.get('host_id')),
-               "pFields2Return": ['KLHST_WKS_OS_NAME', 'KLHST_WKS_LAST_FULLSCAN', 'KLHST_WKS_VIRUS_COUNT',
-                                  'KLHST_WKS_HOSTNAME', 'KLHST_WKS_DN', 'KLHST_WKS_DNSDOMAIN']}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    
-    # Check if the response contains strAccessorId
-    if 'strAccessor' not in response:
-        return response
-    
-    str_accessor_id = response['strAccessor']
-    # Initialize an empty list to collect chunk data
-    chunk_data = []
-    
-    # Step 2: Use strAccessorId to fetch data page by page
-    page = 1
-    items_per_page = 100  # Adjust this based on your requirements
-    
-    while True:
-        chunk_endpoint = 'ChunkAccessor.GetItemsChunk'
-        chunk_payload = {
-            "strAccessorId": str_accessor_id,
-            "lFirstItemIndex": (page - 1) * items_per_page,
-            "lItemsCount": items_per_page
-        }
-        
-        chunk_response = kedr.make_rest_call(endpoint=chunk_endpoint, method='POST', data=json.dumps(chunk_payload))
-        # Extract and append chunk data to the list
-        if 'pChunk' in chunk_response:
-            chunk_data.append(chunk_response['pChunk'])
-        
-        # Check if there are more pages to fetch
-        if 'bLastChunk' in chunk_response and not chunk_response['bLastChunk']:
-            page += 1
-        else:
-            break
-        
+    headers = kedr.start_session(config, params)
+    host_id = params.get('host_id')
+    endpoint = 'api/v1.0/HostGroup.GetHostInfo'
+    data = {"strHostName": host_id,
+            "pFields2Return": ['KLHST_WKS_OS_NAME', 'KLHST_WKS_LAST_FULLSCAN', 'KLHST_WKS_VIRUS_COUNT',
+                               'KLHST_WKS_HOSTNAME', 'KLHST_WKS_DN', 'KLHST_WKS_DNSDOMAIN']}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
-    
-    # Return the collected chunk data as a JSON array
-    return json.dumps(chunk_data)
 
+def get_result(strAccessor, items_count, config, params):
+    kedr = KasperskyEDR(config)
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/ChunkAccessor.GetItemsChunk'
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    data = {
+        "strAccessor": strAccessor,
+        "nStart": 0,
+        "nCount": items_count
+    }
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    results = json.loads(response.text)['pChunk']['KLCSP_ITERATOR_ARRAY']
+    return results
 
 
 def get_groups(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'HostGroup.FindGroups'
-    payload = {"wstrFilter": "", "vecFieldsToReturn": ['id', 'name'], "lMaxLifeTime": 100}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/HostGroup.FindGroups'
+    data = {"wstrFilter": "", "vecFieldsToReturn": ['id', 'name'], "lMaxLifeTime": 3600}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    strAccessor = json.loads(response.text)['strAccessor']
+    items_count = get_search_results(strAccessor, config, params)
+    items_count = json.loads(response.text)['PxgRetVal']
+    response = get_result(strAccessor, items_count, config, params)
     return response
 
 
 def get_listhost_group(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'HostGroup.FindHosts'
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/HostGroup.FindHosts'
     group_id = params.get('group_id')
-    payload = {"wstrFilter": "(KLHST_WKS_GROUPID = " + str(group_id) + ")",
-               "vecFieldsToReturn": ['KLHST_WKS_FQDN',
-                                     'KLHST_WKS_HOSTNAME', 'KLHST_WKS_DN', 'KLHST_WKS_OS_NAME'],
-               "lMaxLifeTime": 100}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    
-    # Check if the response contains strAccessorId
-    if 'strAccessor' not in response:
-        return response
-    
-    str_accessor_id = response['strAccessor']
-    # Initialize an empty list to collect chunk data
-    chunk_data = []
-    
-    # Step 2: Use strAccessorId to fetch data page by page
-    page = 1
-    items_per_page = 100  # Adjust this based on your requirements
-    
-    while True:
-        chunk_endpoint = 'ChunkAccessor.GetItemsChunk'
-        chunk_payload = {
-            "strAccessorId": str_accessor_id,
-            "lFirstItemIndex": (page - 1) * items_per_page,
-            "lItemsCount": items_per_page
-        }
-        
-        chunk_response = kedr.make_rest_call(endpoint=chunk_endpoint, method='POST', data=json.dumps(chunk_payload))
-        # Extract and append chunk data to the list
-        if 'pChunk' in chunk_response:
-            chunk_data.append(chunk_response['pChunk'])
-        
-        # Check if there are more pages to fetch
-        if 'bLastChunk' in chunk_response and not chunk_response['bLastChunk']:
-            page += 1
-        else:
-            break
-        
-
-    
-    # Return the collected chunk data as a JSON array
-    return json.dumps(chunk_data)
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    data = {"wstrFilter": "(KLHST_WKS_GROUPID = " + str(group_id) + ")",
+            "vecFieldsToReturn": ['KLHST_WKS_FQDN',
+                                  'KLHST_WKS_HOSTNAME', 'KLHST_WKS_DN', 'KLHST_WKS_OS_NAME'],
+            "lMaxLifeTime": 3600}
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    strAccessor = json.loads(response.text)['strAccessor']
+    items_count = get_search_results(strAccessor, config, params)
+    items_count = json.loads(response.text)['PxgRetVal']
+    response = get_result(strAccessor, items_count, config, params)
+    return response
 
 
 def delete_group(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'HostGroup.RemoveGroup'
-    payload = {'nGroup': params.get('group_id'), 'nFlags': params.get('flag')}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    return response
+    endpoint = 'api/v1.0/HostGroup.RemoveGroup'
+    data = {'nGroup': params.get('group_id'), 'nFlags': params.get('flag')}
+    headers = kedr.start_session(config, params)
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
 
 def add_group(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'HostGroup.AddGroup'
-    payload = {'pInfo': {'name': params.get('name'), 'parentId': config.get('parent_id')}}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    return response
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/HostGroup.AddGroup'
+    session = kedr.Session()
+    data = {'pInfo': {'name': params.get('name'), 'parentId': params.get('parent_id')}}
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
 
 def get_software_installed(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'InventoryApi.GetHostInvProducts'
-    payload = {'szwHostId': str(params.get('host_id'))}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    return response
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/InventoryApi.GetHostInvProducts'
+    data = {'szwHostId': str(params.get('host_id'))}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
 
 def get_product_installed(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'HostGroup.GetHostProducts'
-    payload = {"strHostName": str(params.get('host_id'))}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    return response
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/HostGroup.GetHostProducts'
+    data = {"strHostName": str(params.get('host_id'))}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
 
 def list_policies_request(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'Policy.GetPoliciesForGroup'
-    payload = {"nGroupId": params.get('group_id')}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    return response
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/Policy.GetPoliciesForGroup'
+    data = {"nGroupId": params.get('group_id')}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
 
 def get_policy_request(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'Policy.GetPolicyData'
-    payload = {"nPolicy": params.get('policy_id')}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    return response
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/Policy.GetPolicyData'
+    data = {"nPolicy": params.get('policy_id')}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
 
 def add_policy_request(config, params):
     kedr = KasperskyEDR(config)
-    endpoint = 'Policy.AddPolicy'
-    payload = {'nGroupId': params.get('nGroupId'), 'pPolicyData': {'KLPOL_DN': params.get('KLPOL_DN'),
-                                                                   'KLPOL_PRODUCT': params.get('KLPOL_PRODUCT'),
-                                                                   'KLPOL_VERSION': params.get('KLPOL_VERSION'),
-                                                                   'KLPOL_GROUP_ID': params.get('KLPOL_GROUP_ID')}}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    return response
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/Policy.AddPolicy'
+    data = {'pPolicyData': {'KLPOL_DN': params.get('KLPOL_DN'),
+                            'KLPOL_PRODUCT': params.get('KLPOL_PRODUCT'),
+                            'KLPOL_VERSION': params.get('KLPOL_VERSION'),
+                            'KLPOL_GROUP_ID': params.get('KLPOL_GROUP_ID')}}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
 
 def move_hosts(config, params):
     kedr = KasperskyEDR(config)
-    login(config, params)
-    endpoint = 'HostGroup.MoveHostsToGroup'
+    headers = kedr.start_session(config, params)
+    endpoint = 'api/v1.0/HostGroup.MoveHostsToGroup'
     pHostNames = [params.get('pHostNames')]
-    payload = {'nGroup': params.get('newgroup'), 'pHostNames': pHostNames}
-    response = kedr.make_rest_call(endpoint=endpoint, method='POST', data=json.dumps(payload))
-    return response
+    data = {'nGroup': params.get('newgroup'), 'pHostNames': pHostNames}
+    session = kedr.Session()
+    url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
+    response = session.post(url=url, headers=headers, data=json.dumps(data), verify=False)
+    return json.loads(response.text)
 
 
 def _check_health(config):
     try:
-        res = login(config, params={})
+        res = get_groups(config, params={})
         if res:
             return True
     except Exception as err:

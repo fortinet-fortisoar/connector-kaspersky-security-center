@@ -1,5 +1,4 @@
 #### What's Fixed
-- Added pagination support to the following actions:
-   - Get Host List
-   - Get All Groups Details
-   - Get All Policies on Specific Group
+
+- This connector version is now certified.
+- Using requests session for action that requires multiple queries

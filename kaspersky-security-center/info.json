@@ -1,12 +1,9 @@
 {
   "name": "kaspersky-security-center",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "label": "Kaspersky Security Center",
   "description": "Kaspersky Security Center makes it easy to manage and secure both physical and virtual endpoints from a single, unified management console.",
-  "publisher": "Community",
-  "cs_approved": false,
-  "cs_compatible": true,
-  "help_online": "https://github.com/fortinet-fortisoar/connector-kaspersky-security-center/blob/release/1.0.1/docs/KasperskySecurityCenterConnectorDoc.md",
+  "publisher": "Fortinet",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "category": "Endpoint Security",
@@ -20,7 +17,17 @@
         "required": true,
         "visible": true,
         "editable": true,
-        "placeholder": "https://kaspersky.domain.com:13299"
+        "tooltip": "URL of the Kaspersky Security Center server to which you will connect and perform automated operations."
+      },
+      {
+        "title": "Server Port",
+        "description": "Port of the Kaspersky Security Center server to which you will connect and perform automated operations.",
+        "type": "text",
+        "name": "server_port",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "tooltip": "Port of the Kaspersky Security Center server to which you will connect and perform automated operations."
       },
       {
         "title": "Username",
@@ -29,7 +36,8 @@
         "name": "username",
         "required": true,
         "visible": true,
-        "editable": true
+        "editable": true,
+        "tootlip": "Username to access the Kaspersky Security Center server to which you will connect and perform automated operations."
       },
       {
         "title": "Password",
@@ -38,7 +46,8 @@
         "name": "password",
         "required": true,
         "visible": true,
-        "editable": true
+        "editable": true,
+        "tooltip": "Password to access the Kaspersky Security Center server to which you will connect and perform automated operations."
       },
       {
         "title": "Verify SSL",
@@ -48,7 +57,8 @@
         "required": false,
         "visible": true,
         "editable": true,
-        "value": true
+        "value": true,
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
       }
     ]
   },
@@ -59,7 +69,17 @@
       "description": "Retrieves a list of all hosts located in specific group from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "get_listhost_group",
-      "output_schema": {},
+      "output_schema": [
+        {
+          "type": "",
+          "value": {
+            "KLHST_WKS_DN": "",
+            "KLHST_WKS_FQDN": "",
+            "KLHST_WKS_OS_NAME": "",
+            "KLHST_WKS_HOSTNAME": ""
+          }
+        }
+      ],
       "parameters": [
         {
           "title": "Group ID",
@@ -79,7 +99,18 @@
       "description": "Retrieves a host details from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "get_host_details",
-      "output_schema": {},
+      "output_schema": {
+        "PxgRetVal": {
+          "KLHST_WKS_DN": "",
+          "KLHST_WKS_OS_NAME": "",
+          "KLHST_WKS_HOSTNAME": "",
+          "KLHST_WKS_DNSDOMAIN": "",
+          "KLHST_WKS_VIRUS_COUNT": {
+            "type": "",
+            "value": ""
+          }
+        }
+      },
       "parameters": [
         {
           "title": "Host ID",
@@ -101,7 +132,36 @@
       "annotation": "get_hosts_group_static_info",
       "parameters": [],
       "enabled": true,
-      "output_schema": {}
+      "output_schema": {
+        "PxgRetVal": {
+          "KLADMSRV_VSID": "",
+          "KLSRV_NETSIZE": "",
+          "KLADMSRV_VSUID": "",
+          "KLADMSRV_GRP_ROOT": "",
+          "KLADMSRV_KSC_MODE": "",
+          "KLADMSRV_GRP_SUPER": "",
+          "KLADMSRV_EV_EV_SIZE": {
+            "type": "",
+            "value": ""
+          },
+          "KLADMSRV_IS_VIRTUAL": "",
+          "KLADMSRV_HOSTED_TYPE": "",
+          "KLADMSRV_PCLOUD_MODE": "",
+          "KLADMSRV_PRODUCT_NAME": "",
+          "KLADMSRV_LINUX_EDITION": "",
+          "KLADMSRV_NEED_UNC_PATH": "",
+          "KLADMSRV_B2B_CLOUD_MODE": "",
+          "KLADMSRV_GRP_UNASSIGNED": "",
+          "KLADMSRV_NAGENT_RUNNING": "",
+          "KLADMSRV_PRODUCT_VERSION": "",
+          "KLADMSRV_SERVER_HOSTNAME": "",
+          "KLADMSRV_SPL_PPC_ENABLED": "",
+          "KLADMSRV_SERVER_VERSION_ID": "",
+          "KLADMSRV_FORCE_SYNC_SUPPORTED": "",
+          "KLADMSRV_PRODUCT_FULL_VERSION": "",
+          "KLADMSRV_MAINTENANCE_SUPPORTED": ""
+        }
+      }
     },
     {
       "operation": "get_software_installed",
@@ -109,11 +169,45 @@
       "description": "Retrieves a list of all product details installed from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "get_software_installed",
-      "output_schema": {},
+      "output_schema": {
+        "PxgRetVal": {
+          "GNRL_EA_PARAM_1": [
+            {
+              "type": "",
+              "value": {
+                "LangId": "",
+                "bIsMsi": "",
+                "Comments": "",
+                "HelpLink": "",
+                "ARPRegKey": "",
+                "ProductID": "",
+                "Publisher": "",
+                "VapmBuild": {
+                  "type": "",
+                  "value": ""
+                },
+                "InstallDir": "",
+                "InstanceID": {
+                  "type": "",
+                  "value": ""
+                },
+                "DisplayName": "",
+                "InstallDate": "",
+                "PackageCode": "",
+                "HelpTelephone": "",
+                "DisplayVersion": "",
+                "UninstallString": "",
+                "CleanerProductName": "",
+                "QuietUninstallString": ""
+              }
+            }
+          ]
+        }
+      },
       "parameters": [
         {
-          "title": "Host ID",
-          "description": "Specify the ID of the host based on which you want to retrieves a product details from the Kaspersky Security Center.",
+          "title": "Workstation Hostname (KLHST_WKS_HOSTNAME)",
+          "description": "Specify the workstation hostname based on which you want to retrieves a product details from the Kaspersky Security Center.",
           "type": "text",
           "name": "host_id",
           "required": true,
@@ -129,7 +223,112 @@
       "description": "Retrieves a kaspersky product details installed at specific host from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "get_product_installed",
-      "output_schema": {},
+      "output_schema": {
+        "PxgRetVal": {
+          "1093": {
+            "type": "",
+            "value": {
+              "1.0.0.0": {
+                "type": "",
+                "value": {
+                  "LocID": "",
+                  "Folder": "",
+                  "FileName": "",
+                  "FilePath": "",
+                  "DataFolder": "",
+                  "ModuleType": "",
+                  "BaseRecords": "",
+                  "DisplayName": "",
+                  "InstallTime": {
+                    "type": "",
+                    "value": ""
+                  },
+                  "ProdVersion": "",
+                  "InstallationId": "",
+                  "LastUpdateTime": {
+                    "type": "",
+                    "value": ""
+                  }
+                }
+              }
+            }
+          },
+          "1103": {
+            "type": "",
+            "value": {
+              "1.0.0.0": {
+                "type": "",
+                "value": {
+                  "LocID": "",
+                  "Folder": "",
+                  "FileName": "",
+                  "FilePath": "",
+                  "DataFolder": "",
+                  "ModuleType": "",
+                  "BaseRecords": "",
+                  "DisplayName": "",
+                  "InstallTime": {
+                    "type": "",
+                    "value": ""
+                  },
+                  "ProdVersion": "",
+                  "InstallationId": "",
+                  "LastUpdateTime": {
+                    "type": "",
+                    "value": ""
+                  },
+                  "KLNAG_INSTALLATION_ID": ""
+                }
+              }
+            }
+          },
+          "KES": {
+            "type": "",
+            "value": {
+              "11.0.0.0": {
+                "type": "",
+                "value": {
+                  "Tasks": [],
+                  "BaseDate": {
+                    "type": "",
+                    "value": ""
+                  },
+                  "FileName": "",
+                  "FilePath": "",
+                  "CustomName": "",
+                  "DataFolder": "",
+                  "MngProduct": "",
+                  "ModuleType": "",
+                  "BaseRecords": "",
+                  "DisplayName": "",
+                  "InstallTime": {
+                    "type": "",
+                    "value": ""
+                  },
+                  "ProdVersion": "",
+                  "ConnectorFlags": "",
+                  "InstallationId": "",
+                  "LastUpdateTime": {
+                    "type": "",
+                    "value": ""
+                  },
+                  "BaseInstallDate": {
+                    "type": "",
+                    "value": ""
+                  },
+                  "ConnDisplayName": "",
+                  "ConnProdVersion": "",
+                  "ConnectorVersion": "",
+                  "TasksComplemented": [],
+                  "ConnectorInstanceId": "",
+                  "ConnectorComponentName": "",
+                  "KLCONNAPPINST_MUST_LOAD_OUTSIDE": ""
+                }
+              }
+            }
+          }
+        }
+      },
       "parameters": [
         {
           "title": "Host ID",
@@ -149,7 +348,9 @@
       "description": "Create a new administration group in Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "add_group",
-      "output_schema": {},
+      "output_schema": {
+        "PxgRetVal": ""
+      },
       "parameters": [
         {
           "title": "Group Parent ID",
@@ -178,7 +379,15 @@
       "description": "Retrieves a list of all groups from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "get_groups",
-      "output_schema": {},
+      "output_schema": [
+        {
+          "type": "",
+          "value": {
+            "id": "",
+            "name": ""
+          }
+        }
+      ],
       "parameters": [],
       "enabled": true
     },
@@ -217,7 +426,9 @@
       "description": "Deletes an specific administrative group in the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "delete_group",
-      "output_schema": {},
+      "output_schema": {
+        "strActionGuid": ""
+      },
       "parameters": [
         {
           "title": "Group ID",
@@ -248,17 +459,10 @@
       "description": "Create New Policy and assigned to specific Group in Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "add_policy_request",
-      "output_schema": {},
+      "output_schema": {
+        "PxgRetVal": ""
+      },
       "parameters": [
-        {
-          "title": "Group Id",
-          "description": "Specify the ID of the group based on which you want to create a new policy in Kaspersky Security Center.",
-          "type": "text",
-          "name": "nGroupId",
-          "required": true,
-          "visible": true,
-          "editable": true
-        },
         {
           "title": "Policy Display Name",
           "description": "Specify the display name of the policy based on which you want to create a new policy in Kaspersky Security Center.",
@@ -304,7 +508,38 @@
       "description": "Retrieves a policies located in specified group from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "list_policies_request",
-      "output_schema": {},
+      "output_schema": {
+        "PxgRetVal": [
+          {
+            "type": "",
+            "value": {
+              "KLPOL_DN": "",
+              "KLPOL_ID": "",
+              "KLPOL_ACTIVE": "",
+              "KLPOL_FORCED": "",
+              "KLPOL_CREATED": {
+                "type": "",
+                "value": ""
+              },
+              "KLPOL_GSYN_ID": "",
+              "KLPOL_PRODUCT": "",
+              "KLPOL_ROAMING": "",
+              "KLPOL_VERSION": "",
+              "KLPOL_GROUP_ID": "",
+              "KLPOL_MODIFIED": {
+                "type": "",
+                "value": ""
+              },
+              "KLPOL_INHERITED": "",
+              "KLPOL_GROUP_NAME": "",
+              "KLPOL_PROFILES_NUM": "",
+              "KLPOL_ACCEPT_PARENT": "",
+              "KLPOL_HIDE_ON_SLAVES": "",
+              "KLPOL_FORCE_DISTRIB2CHILDREN": ""
+            }
+          }
+        ]
+      },
       "parameters": [
         {
           "title": "Group ID",
@@ -324,7 +559,32 @@
       "description": "Retrieve a specific policy from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "get_policy_request",
-      "output_schema": {},
+      "output_schema": {
+        "PxgRetVal": {
+          "KLPOL_DN": "",
+          "KLPOL_ID": "",
+          "KLPOL_ACTIVE": "",
+          "KLPOL_FORCED": "",
+          "KLPOL_CREATED": {
+            "type": "",
+            "value": ""
+          },
+          "KLPOL_GSYN_ID": "",
+          "KLPOL_PRODUCT": "",
+          "KLPOL_ROAMING": "",
+          "KLPOL_VERSION": "",
+          "KLPOL_GROUP_ID": "",
+          "KLPOL_MODIFIED": {
+            "type": "",
+            "value": ""
+          },
+          "KLPOL_INHERITED": "",
+          "KLPOL_GROUP_NAME": "",
+          "KLPOL_ACCEPT_PARENT": "",
+          "KLPOL_HIDE_ON_SLAVES": "",
+          "KLPOL_FORCE_DISTRIB2CHILDREN": ""
+        }
+      },
       "parameters": [
         {
           "title": "Policy ID",
@@ -338,5 +598,8 @@
       ],
       "enabled": true
     }
-  ]
+  ],
+  "cs_approved": true,
+  "cs_compatible": true,
+  "help_online": ""
 }
