@@ -51,14 +51,14 @@
       },
       {
         "title": "Verify SSL",
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is selected, i.e., set to true.",
         "type": "checkbox",
         "name": "verify_ssl",
         "required": false,
         "visible": true,
         "editable": true,
         "value": true,
-        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is selected, i.e., set to true."
       }
     ]
   },
@@ -66,7 +66,7 @@
     {
       "operation": "get_listhost_group",
       "title": "Get Host List",
-      "description": "Retrieves a list of all hosts located in specific group from the Kaspersky Security Center.",
+      "description": "Retrieves a list of all hosts located in a specific group from the Kaspersky Security Center based on the group ID that you have specified.",
       "category": "investigation",
       "annotation": "get_listhost_group",
       "output_schema": [
@@ -83,12 +83,13 @@
       "parameters": [
         {
           "title": "Group ID",
-          "description": "Specify the ID of the group based on which you want to retrieve a list of all host details from Kaspersky Security Center.",
+          "description": "Specify the ID of the group based on which to retrieve a list of all host details from Kaspersky Security Center.",
           "type": "text",
           "name": "group_id",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the ID of the group based on which to retrieve a list of all host details from Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -96,7 +97,7 @@
     {
       "operation": "get_host_details",
       "title": "Get Host Details",
-      "description": "Retrieves a host details from the Kaspersky Security Center.",
+      "description": "Retrieves a host details from the Kaspersky Security Center based on the host ID that you have specified.",
       "category": "investigation",
       "annotation": "get_host_details",
       "output_schema": {
@@ -114,12 +115,13 @@
       "parameters": [
         {
           "title": "Host ID",
-          "description": "Specify the ID of the host based on which you want to retrieve host details from Kaspersky Security Center.",
+          "description": "Specify the ID of the host based on which to retrieve host details from Kaspersky Security Center.",
           "type": "text",
           "name": "host_id",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the ID of the host based on which to retrieve host details from Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -127,7 +129,7 @@
     {
       "operation": "get_hosts_group_static_info",
       "title": "Get Host Group Static Info",
-      "description": "Retrieves a host group static Info from the Kaspersky Security Center.",
+      "description": "Retrieves a host group static info from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "get_hosts_group_static_info",
       "parameters": [],
@@ -166,7 +168,7 @@
     {
       "operation": "get_software_installed",
       "title": "Get Software Installed on Specific Host",
-      "description": "Retrieves a list of all product details installed from the Kaspersky Security Center.",
+      "description": "Retrieves a list of all software details installed on a workstation from the Kaspersky Security Center based on the workstation hostname that you have specified.",
       "category": "investigation",
       "annotation": "get_software_installed",
       "output_schema": {
@@ -207,12 +209,13 @@
       "parameters": [
         {
           "title": "Workstation Hostname (KLHST_WKS_HOSTNAME)",
-          "description": "Specify the workstation hostname based on which you want to retrieves a product details from the Kaspersky Security Center.",
+          "description": "Specify the workstation hostname based on which to retrieve details of installed software from Kaspersky Security Center.",
           "type": "text",
           "name": "host_id",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the workstation hostname based on which to retrieve details of installed software from Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -220,7 +223,7 @@
     {
       "operation": "get_product_installed",
       "title": "Get Products Installed",
-      "description": "Retrieves a kaspersky product details installed at specific host from the Kaspersky Security Center.",
+      "description": "Retrieves a kaspersky product details installed on a specific host from the Kaspersky Security Center based on the host ID that you have specified.",
       "category": "investigation",
       "annotation": "get_product_installed",
       "output_schema": {
@@ -332,12 +335,13 @@
       "parameters": [
         {
           "title": "Host ID",
-          "description": "Specify the ID of the host based on which you want to retrieve product details from Kaspersky Security Center.",
+          "description": "Specify the ID of the host based on which to retrieve product details from Kaspersky Security Center.",
           "type": "text",
           "name": "host_id",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the ID of the host based on which to retrieve product details from Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -345,7 +349,7 @@
     {
       "operation": "add_group",
       "title": "Add Group",
-      "description": "Create a new administration group in Kaspersky Security Center.",
+      "description": "Create a new administration group in Kaspersky Security Center based on the group parent ID and group name that you have specified.",
       "category": "investigation",
       "annotation": "add_group",
       "output_schema": {
@@ -354,21 +358,23 @@
       "parameters": [
         {
           "title": "Group Parent ID",
-          "description": "Specify the ID of the parent group based on which you want to create a new group in Kaspersky Security Center.",
+          "description": "Specify the ID of the parent group within which to create a new group in Kaspersky Security Center.",
           "type": "text",
           "name": "parent_id",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the ID of the parent group within which to create a new group in Kaspersky Security Center."
         },
         {
           "title": "Group Name",
-          "description": "Specify the name of the group based on which you want to create a new group in Kaspersky Security Center.",
+          "description": "Specify the name of the group being created in Kaspersky Security Center.",
           "type": "text",
           "name": "name",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the name of the group being created in Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -376,7 +382,7 @@
     {
       "operation": "get_groups",
       "title": "Get All Groups Details",
-      "description": "Retrieves a list of all groups from the Kaspersky Security Center.",
+      "description": "Retrieves details of all groups from the Kaspersky Security Center.",
       "category": "investigation",
       "annotation": "get_groups",
       "output_schema": [
@@ -394,28 +400,30 @@
     {
       "operation": "move_hosts",
       "title": "Move Host to Specific Group",
-      "description": "Move Host from group to other group in Kaspersky Security Center.",
+      "description": "Move Host from one group to another in Kaspersky Security Center based on the new group ID and the hostname that you have specified.",
       "category": "investigation",
       "annotation": "move_hosts",
       "output_schema": {},
       "parameters": [
         {
           "title": "New Group ID",
-          "description": "Specify the group ID based on which you want to move host to specific group in Kaspersky Security Center.",
+          "description": "Specify the group ID within which to move the host in Kaspersky Security Center.",
           "type": "text",
           "name": "newgroup",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the group ID within which to move the host in Kaspersky Security Center."
         },
         {
           "title": "Host Name",
-          "description": "Specify the name of the host based on which you want to move host to specific group in Kaspersky Security Center.",
+          "description": "Specify the name of the host to move within the specified group in Kaspersky Security Center.",
           "type": "text",
           "name": "pHostNames",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the name of the host to move within the specified group in Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -423,7 +431,7 @@
     {
       "operation": "delete_group",
       "title": "Delete Specific Group",
-      "description": "Deletes an specific administrative group in the Kaspersky Security Center.",
+      "description": "Deletes an specific administrative group in the Kaspersky Security Center based on the group ID and value that you have specified.",
       "category": "investigation",
       "annotation": "delete_group",
       "output_schema": {
@@ -432,23 +440,29 @@
       "parameters": [
         {
           "title": "Group ID",
-          "description": "Specify the ID of the group based on which you want to delete a specific group in Kaspersky Security Center.",
+          "description": "Specify the ID of the group to delete from Kaspersky Security Center.",
           "type": "text",
           "name": "group_id",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the ID of the group to delete from Kaspersky Security Center."
         },
         {
-          "title": "Value",
-          "description": "Specify the value  based on which you want to delete a specific group in Kaspersky Security Center.",
-          "type": "integer",
+          "title": "Flag",
+          "description": "Select a delete flag based on which to delete this group in Kaspersky Security Center. You can choose from the following options: Delete group only if it is empty, Delete group and its subgroups, policies, and tasks or Delete group and its subgroups, hosts, policies, and tasks.",
+          "type": "select",
           "name": "flag",
           "required": true,
           "visible": true,
           "editable": true,
-          "value": 1,
-          "tooltip": "1 = Delete group only if it is empty, 2 = delete group with subgroups, policies and tasks 3 = delete group with subgroups, hosts, policies and tasks."
+          "value": "Delete group only if it is empty",
+          "options": [
+            "Delete group only if it is empty",
+            "Delete group and its subgroups, policies, and tasks",
+            "Delete group and its subgroups, hosts, policies, and tasks"
+          ],
+          "tooltip": "Select a delete flag based on which to delete this group in Kaspersky Security Center. You can choose from the following options: Delete group only if it is empty, Delete group and its subgroups, policies, and tasks or Delete group and its subgroups, hosts, policies, and tasks."
         }
       ],
       "enabled": true
@@ -456,7 +470,7 @@
     {
       "operation": "add_policy_request",
       "title": "Add Policy",
-      "description": "Create New Policy and assigned to specific Group in Kaspersky Security Center.",
+      "description": "Create New Policy and assigned to specific Group in Kaspersky Security Center based on the policy name, product name, and other input parameters that you have specified.",
       "category": "investigation",
       "annotation": "add_policy_request",
       "output_schema": {
@@ -465,39 +479,43 @@
       "parameters": [
         {
           "title": "Policy Display Name",
-          "description": "Specify the display name of the policy based on which you want to create a new policy in Kaspersky Security Center.",
+          "description": "Specify the display name of the policy to create in Kaspersky Security Center.",
           "type": "text",
           "name": "KLPOL_DN",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the display name of the policy to create in Kaspersky Security Center."
         },
         {
           "title": "Policy Product Name",
-          "description": "Specify the product name of the policy based on which you want to create a new policy in Kaspersky Security Center.",
+          "description": "Specify the product name of the policy being created in Kaspersky Security Center.",
           "type": "text",
           "name": "KLPOL_PRODUCT",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the product name of the policy being created in Kaspersky Security Center."
         },
         {
           "title": "Policy Product Version",
-          "description": "Specify the product version of the policy based on which you want to create a new policy in Kaspersky Security Center.",
+          "description": "Specify the product version of the policy being created in Kaspersky Security Center.",
           "type": "text",
           "name": "KLPOL_VERSION",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the product version of the policy being created in Kaspersky Security Center."
         },
         {
           "title": "Policy GROUP ID",
-          "description": "Specify the group ID of the policy based on which you want to create a new policy in Kaspersky Security Center.",
+          "description": "Specify the group ID of the policy being created in Kaspersky Security Center.",
           "type": "integer",
           "name": "KLPOL_GROUP_ID",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the group ID of the policy being created in Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -505,7 +523,7 @@
     {
       "operation": "list_policies_request",
       "title": "Get All Policies on Specific Group",
-      "description": "Retrieves a policies located in specified group from the Kaspersky Security Center.",
+      "description": "Retrieves a policies located in specified group from the Kaspersky Security Center based on the group ID that you have specified.",
       "category": "investigation",
       "annotation": "list_policies_request",
       "output_schema": {
@@ -543,12 +561,13 @@
       "parameters": [
         {
           "title": "Group ID",
-          "description": "Specify the ID of the group based on which you want to retrieves list of all policies from Kaspersky Security Center.",
+          "description": "Specify the ID of the group to retrieve its policies from Kaspersky Security Center.",
           "type": "text",
           "name": "group_id",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the ID of the group to retrieve its policies from Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -556,7 +575,7 @@
     {
       "operation": "get_policy_request",
       "title": "Get Specific Policy",
-      "description": "Retrieve a specific policy from the Kaspersky Security Center.",
+      "description": "Retrieve a specific policy from the Kaspersky Security Center based on the policy ID that you have specified.",
       "category": "investigation",
       "annotation": "get_policy_request",
       "output_schema": {
@@ -588,12 +607,13 @@
       "parameters": [
         {
           "title": "Policy ID",
-          "description": "Specify the ID of the policy based on which you want to retrieve a specific policy from Kaspersky Security Center.",
+          "description": "Specify the ID of the policy to retrieve its details from Kaspersky Security Center.",
           "type": "text",
           "name": "policy_id",
           "required": true,
           "visible": true,
-          "editable": true
+          "editable": true,
+          "tooltip": "Specify the ID of the policy to retrieve its details from Kaspersky Security Center."
         }
       ],
       "enabled": true
@@ -601,5 +621,5 @@
   ],
   "cs_approved": true,
   "cs_compatible": true,
-  "help_online": ""
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.2/kaspersky-security-center/891/kaspersky-security-center-v1-0-2"
 }

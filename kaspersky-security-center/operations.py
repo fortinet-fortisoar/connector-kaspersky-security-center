@@ -162,9 +162,10 @@ def get_listhost_group(config, params):
 
 
 def delete_group(config, params):
+    flags = {'Delete group only if it is empty': 1, 'Delete group and its subgroups, policies, and tasks': 2, 'Delete group and its subgroups, hosts, policies, and tasks': 3}
     kedr = KasperskyEDR(config)
     endpoint = 'api/v1.0/HostGroup.RemoveGroup'
-    data = {'nGroup': params.get('group_id'), 'nFlags': params.get('flag')}
+    data = {'nGroup': params.get('group_id'), 'nFlags': flags.get(params.get('flag'))}
     headers = kedr.start_session(config, params)
     session = kedr.Session()
     url = "https://" + config.get('server_url') + ':' + str(config.get('server_port')) + '/' + endpoint
