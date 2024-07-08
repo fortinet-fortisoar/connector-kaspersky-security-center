@@ -97,7 +97,7 @@
     {
       "operation": "get_host_details",
       "title": "Get Host Details",
-      "description": "Retrieves a host details from the Kaspersky Security Center based on the host ID that you have specified.",
+      "description": "Retrieves a host's detail from the Kaspersky Security Center based on the host ID that you have specified.",
       "category": "investigation",
       "annotation": "get_host_details",
       "output_schema": {
@@ -223,7 +223,7 @@
     {
       "operation": "get_product_installed",
       "title": "Get Products Installed",
-      "description": "Retrieves a kaspersky product details installed on a specific host from the Kaspersky Security Center based on the host ID that you have specified.",
+      "description": "Retrieves Kaspersky product details installed on a specific host from the Kaspersky Security Center based on the host ID that you have specified.",
       "category": "investigation",
       "annotation": "get_product_installed",
       "output_schema": {
@@ -431,7 +431,7 @@
     {
       "operation": "delete_group",
       "title": "Delete Specific Group",
-      "description": "Deletes an specific administrative group in the Kaspersky Security Center based on the group ID and value that you have specified.",
+      "description": "Deletes a specific administrative group from Kaspersky Security Center based on the group ID and value that you have specified.",
       "category": "investigation",
       "annotation": "delete_group",
       "output_schema": {
@@ -450,7 +450,7 @@
         },
         {
           "title": "Flag",
-          "description": "Select a delete flag based on which to delete this group in Kaspersky Security Center. You can choose from the following options: Delete group only if it is empty, Delete group and its subgroups, policies, and tasks or Delete group and its subgroups, hosts, policies, and tasks.",
+          "description": "Select the type of delete operation to perform on this group in Kaspersky Security Center. You can choose from the following options: Delete group only if it is empty, Delete group and its subgroups, policies, and tasks or Delete group and its subgroups, hosts, policies, and tasks.",
           "type": "select",
           "name": "flag",
           "required": true,
@@ -462,7 +462,7 @@
             "Delete group and its subgroups, policies, and tasks",
             "Delete group and its subgroups, hosts, policies, and tasks"
           ],
-          "tooltip": "Select a delete flag based on which to delete this group in Kaspersky Security Center. You can choose from the following options: Delete group only if it is empty, Delete group and its subgroups, policies, and tasks or Delete group and its subgroups, hosts, policies, and tasks."
+          "tooltip": "Select the type of delete operation to perform on this group in Kaspersky Security Center. You can choose from the following options: Delete group only if it is empty, Delete group and its subgroups, policies, and tasks or Delete group and its subgroups, hosts, policies, and tasks."
         }
       ],
       "enabled": true
@@ -523,7 +523,7 @@
     {
       "operation": "list_policies_request",
       "title": "Get All Policies on Specific Group",
-      "description": "Retrieves a policies located in specified group from the Kaspersky Security Center based on the group ID that you have specified.",
+      "description": "Retrieves policies located in specified group from Kaspersky Security Center based on the group ID that you have specified.",
       "category": "investigation",
       "annotation": "list_policies_request",
       "output_schema": {
